@@ -3,9 +3,32 @@
   <head>
     <title>Simple Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body{
+        direction: rtl;
+      }
+        .mina{
+        background-color: cyan;
+        color: black;
+        padding: 5px;
+        border-radius: 5px;
+
+        }
+    .yaser{
+        background-color: coral;
+        color: black;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    div.scroll
+    {
+      height:200px;
+      overflow:scroll;
+      overflow-x:hidden;
+    }
+        </style>
   </head>
   <body>
     <div class="container">
@@ -15,12 +38,14 @@
       <div class="panel panel-primary">
         <div class="panel-heading">Public chat - <span class="num-users">0</span> connected users</div>
         <div class="panel-body">
+          <div class="scroll">
           <div id="chat-messages">
           </div>
           <div id="loading-screen">
             <p>Negotiating communication protocols and loading initial data...</p>
           </div>
         </div>
+      </div>
       </div>
       <div class="panel panel-default">
         <div class="panel-heading">Send some messages</div>
@@ -47,9 +72,9 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="/js/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/js/jquery.cookie.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var host = window.location.host;
@@ -84,10 +109,20 @@
         datetime = datetime.replace("T", " ");
         datetime = datetime.replace(/\.\d*Z/, "");
         //var newEl = $("<p>"+datetime+" - <strong>"+data.nick+":</strong> <span>"+data.message+"</span></p>");
-        var newEl = $("<p/>")
+        var newEl;
+        if (data.nick == "mina") {
+          newEl = $("<p/>")
           .text(datetime + " ")
-          .append($("<strong/>").text(data.nick))
-          .append($("<span/>").text(" " + data.message));
+          .append($("<strong/>").addClass('mina').text(data.nick))
+          .append($("<span/>").addClass('mina').text(" " + data.message));
+        }
+        else{
+          newEl = $("<p/>")
+          .text(datetime + " ")
+          .append($("<strong/>").addClass('yaser').text(data.nick + ": "))
+          .append($("<span/>").addClass('yaser').text(" " + data.message));
+        }
+       
         $("#chat-messages").append(newEl);
       };
 
