@@ -56,6 +56,9 @@
                 <input type="submit" class="btn btn-primary" disabled value="Send" />
                 <a href="#" id="galb">😍</a>
                 <a href="#" id="khande">😂</a>
+                <a href="#" id="bos">😘</a>
+
+                
               </div>
             </div>
           </form>
@@ -148,6 +151,10 @@
       $("#galb").click(function(e){
         e.preventDefault();
         $("#message").val($("#message").val() + $("#galb").html());
+      });
+      $("#bos").click(function(e){
+        e.preventDefault();
+        $("#message").val($("#message").val() + $("#bos").html());
       });
     </script>
     -
